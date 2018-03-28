@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using UniversitySite.DAL;
 using UniversitySite.Models;
+using PagedList;
 
 namespace UniversitySite.Controllers
 {
@@ -16,10 +17,24 @@ namespace UniversitySite.Controllers
         private SchoolContext db = new SchoolContext();
 
         // GET: Student and sort it with search function
-        public ViewResult Index(string sortOrder, string searchString)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+
             var students = from s in db.Students
                            select s;
             if (!String.IsNullOrEmpty(searchString))
@@ -42,7 +57,9 @@ namespace UniversitySite.Controllers
                     students = students.OrderBy(s => s.LastName);
                     break;
             }
-            return View(students.ToList());
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(students.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Student/Details/5
