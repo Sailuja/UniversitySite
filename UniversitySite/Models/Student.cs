@@ -9,7 +9,11 @@ namespace UniversitySite.Models
     public class Student
     {
         public int ID { get; set; }
+        [StringLength(50)]
+        [Display(Name ="Last Name")]
         public string LastName { get; set; }
+
+        [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
         public string FirstMidName { get; set; }
 
         [DataType(DataType.Date)]
