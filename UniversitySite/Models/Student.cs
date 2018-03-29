@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace UniversitySite.Models
 {
@@ -13,10 +15,13 @@ namespace UniversitySite.Models
         [Display(Name ="Last Name")]
         public string LastName { get; set; }
 
+        [Column("FirstName")]
+        [Display(Name = "First Name")]
         [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
         public string FirstMidName { get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "Enrollment Date")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime EnrollmentDate { get; set; }
 
