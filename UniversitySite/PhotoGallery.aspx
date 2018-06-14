@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PhotoGallery.aspx.cs" Inherits="UniversitySite.PhotoGallery" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="PhotoGallery.aspx.cs" Inherits="UniversitySite.PhotoGallery"
+    Layout="~/Views/Shared/-Layout.cshtml"%>
 
 <!DOCTYPE html>
 
